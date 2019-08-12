@@ -1,0 +1,5 @@
+/coverage/
+node_modules/
+h.js
+h.d.ts
+*.tgz

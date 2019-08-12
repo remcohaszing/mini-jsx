@@ -1,0 +1,34 @@
+image: node:12-alpine
+
+stages:
+  - test
+  - publish
+
+before_script:
+  - yarn --frozen-lockfile
+
+eslint:
+  script: yarn eslint --format gitlab .
+  artifacts:
+    reports:
+      codequality: gl-codequality.json
+
+jest:
+  script: yarn jest --coverage --reporters jest-junit
+  artifacts:
+    reports:
+      junit: junit.xml
+
+prettier:
+  script: yarn prettier --check
+
+publish:
+  only:
+    - tags
+  script:
+    - npm config set unsafe-param true
+    - npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+    - npm publish
+
+tsc:
+  script: yarn tsc

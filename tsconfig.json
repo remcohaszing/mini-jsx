@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "inlineSourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "lib": ["dom", "es2017"],
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "target": "esnext",
+    "types": ["jest"]
+  }
+}

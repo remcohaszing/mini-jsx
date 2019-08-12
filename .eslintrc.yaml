@@ -1,0 +1,7 @@
+extends:
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+  - prettier/@typescript-eslint
+rules:
+  "@typescript-eslint/no-empty-interface": off
+  "@typescript-eslint/no-namespace": off

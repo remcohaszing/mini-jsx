@@ -1,0 +1,46 @@
+{
+  "name": "mini-jsx",
+  "version": "1.0.0",
+  "description": "Create DOM elements using JSX",
+  "type": "module",
+  "main": "h.js",
+  "homepage": "https://gitlab.com/appsemble/mini-jsx#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/appsemble/mini-jsx.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/appsemble/mini-jsx.git/issues"
+  },
+  "files": [
+    "h.js",
+    "h.d.ts"
+  ],
+  "scripts": {
+    "eslint": "eslint --max-warnings 0 --ext js,ts,tsx",
+    "prettier": "prettier '**.{json,yaml,yml}'",
+    "prepack": "tsc -p tsconfig-build.json",
+    "test": "jest"
+  },
+  "keywords": [
+    "dom",
+    "html",
+    "jsx"
+  ],
+  "author": "Appsemble <info@appsemble.com> (https://appsemble.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-formatter-gitlab": "^1.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.9.0",
+    "jest-junit": "^8.0.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  }
+}
