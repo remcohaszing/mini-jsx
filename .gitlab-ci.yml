@@ -1,5 +1,8 @@
 image: node:12-alpine
 
+variables:
+  NPM_CONFIG_UNSAFE_PERM: "true"
+
 stages:
   - test
   - publish
@@ -23,10 +26,10 @@ prettier:
   script: yarn prettier --check
 
 publish:
+  stage: publish
   only:
     - tags
   script:
-    - npm config set unsafe-param true
     - npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
     - npm publish
 
