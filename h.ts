@@ -1,11 +1,31 @@
-type Child = boolean | number | null | string | undefined | Node | Children;
-
 // This is a workaround for https://github.com/microsoft/TypeScript/issues/6230
-interface Children extends Array<Child> {}
+interface ChildrenArray extends Array<Children> {}
+/**
+ * Element children supported by Mini JSX.
+ */
+export type Children = boolean | number | null | string | undefined | Node | ChildrenArray;
 
-type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
+/**
+ * A function that will be called with an HTML element.
+ *
+ * @param node The referenced HTML element.
+ */
+export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
 
-interface Attributes<T extends keyof HTMLElementTagNameMap> {
+/**
+ * Global HTML element attributes.
+ *
+ * This may be extended to support new props.
+ *
+ * @example
+ * declare module "mini-jsx" {
+ *   interface Attributes<T extends keyof HTMLElementTagNameMap> {
+ *     // Set the HTML class as an attribute instead of using `className`.
+ *     "class"?: string;
+ *   }
+ * }
+ */
+export interface Attributes<T extends keyof HTMLElementTagNameMap> {
   /**
    * Identifies the currently active element when DOM focus is on a `composite` widget, `textbox`,
    * `group`, or `application`.
@@ -396,11 +416,14 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
     | "treeitem";
 }
 
-type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
+/**
+ * Props that may be passed to a Mini JSX element for the specified HTML tag name.
+ */
+export type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
   {
-    [K in keyof HTMLElementTagNameMap[T]]?: HTMLElementTagNameMap[T][K] extends object
-      ? Partial<HTMLElementTagNameMap[T][K]>
-      : HTMLElementTagNameMap[T][K];
+    [K in keyof HTMLElementTagNameMap[T]]?: HTMLElementTagNameMap[T][K] extends Function
+      ? HTMLElementTagNameMap[T][K]
+      : Partial<HTMLElementTagNameMap[T][K]>;
   };
 
 /**
@@ -416,11 +439,11 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
 const h = <T extends keyof HTMLElementTagNameMap>(
   tag: T,
   props?: Props<T>,
-  ...children: Children
+  ...children: Children[]
 ): HTMLElementTagNameMap[T] => {
   let ref: Ref<T> | undefined;
   const node = document.createElement(tag);
-  const appendChildren = (child: Child): void => {
+  const appendChildren = (child: Children): void => {
     if (Array.isArray(child)) {
       child.forEach(appendChildren);
     } else if (child != null && child !== true && child !== false) {
@@ -470,7 +493,7 @@ declare namespace h {
          *
          * @private
          */
-        "{children}"?: Child;
+        "{children}"?: Children;
       };
     };
 
