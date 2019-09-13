@@ -13,7 +13,7 @@ npm install mini-jsx
 `h` can be used to render JSX.
 
 ```jsx
-import h from "mini-jsx";
+import { h } from "mini-jsx";
 
 const button = (
   <button
@@ -36,7 +36,7 @@ const button = (
 Alternatively, `h` can be called as a function.
 
 ```js
-import h from "mini-jsx";
+import { h } from "mini-jsx";
 
 const button = h(
   "button",
@@ -121,5 +121,5 @@ example React in the same project.
 
 ```js
 /** @jsx h */
-import h from "mini-jsx";
+import { h } from "mini-jsx";
 ```

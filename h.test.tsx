@@ -1,4 +1,4 @@
-import h from "./h";
+import { h } from "./h";
 
 // This is a workaround for https://github.com/facebook/jest/issues/2549
 Object.defineProperty(Object, Symbol.hasInstance, {

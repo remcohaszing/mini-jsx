@@ -3,14 +3,14 @@ interface ChildrenArray extends Array<Children> {}
 /**
  * Element children supported by Mini JSX.
  */
-export type Children = boolean | number | null | string | undefined | Node | ChildrenArray;
+type Children = boolean | number | null | string | undefined | Node | ChildrenArray;
 
 /**
  * A function that will be called with an HTML element.
  *
  * @param node The referenced HTML element.
  */
-export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
+type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
 
 /**
  * Global HTML element attributes.
@@ -25,7 +25,7 @@ export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNa
  *   }
  * }
  */
-export interface Attributes<T extends keyof HTMLElementTagNameMap> {
+interface Attributes<T extends keyof HTMLElementTagNameMap> {
   /**
    * Identifies the currently active element when DOM focus is on a `composite` widget, `textbox`,
    * `group`, or `application`.
@@ -419,7 +419,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
 /**
  * Props that may be passed to a Mini JSX element for the specified HTML tag name.
  */
-export type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
+type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
   {
     [K in keyof HTMLElementTagNameMap[T]]?: HTMLElementTagNameMap[T][K] extends Function
       ? HTMLElementTagNameMap[T][K]
@@ -511,4 +511,4 @@ declare namespace h {
   }
 }
 
-export default h;
+export { h, Attributes, Children, Props, Ref };
