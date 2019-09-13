@@ -1,4 +1,4 @@
-# JSX DOM
+# Mini JSX
 
 > Create DOM elements using JSX
 
