@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "inlineSourceMap": true,
     "jsx": "react",
     "jsxFactory": "h",
     "lib": ["dom", "es2017"],
