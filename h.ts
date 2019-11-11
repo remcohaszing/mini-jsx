@@ -1,9 +1,7 @@
-// This is a workaround for https://github.com/microsoft/TypeScript/issues/6230
-interface ChildrenArray extends Array<Children> {}
 /**
  * Element children supported by Mini JSX.
  */
-type Children = boolean | number | null | string | undefined | Node | ChildrenArray;
+type Children = boolean | number | null | string | undefined | Node | Children[];
 
 /**
  * A function that will be called with an HTML element.
