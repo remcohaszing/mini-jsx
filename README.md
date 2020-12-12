@@ -21,7 +21,7 @@ const button = (
     onclick={() => {
       console.log("Click!");
     }}
-    ref={node => {
+    ref={(node) => {
       // Logs the button
       console.log(node);
     }}
@@ -49,7 +49,7 @@ const button = h(
       // Logs the button
       console.log(node);
     },
-    type: "button"
+    type: "button",
   },
   h("i", { className: "icon" }),
   h("span", null, "Button text")
@@ -106,10 +106,10 @@ Add the following to your babel config.
 ```js
 module.exports = {
   plugins: [
-    ["@babel/plugin-transform-react-jsx", { pragma: "h", useBuiltIns: true }]
+    ["@babel/plugin-transform-react-jsx", { pragma: "h", useBuiltIns: true }],
 
     // More plugins…
-  ]
+  ],
 };
 ```
 

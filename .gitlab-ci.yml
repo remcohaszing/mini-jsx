@@ -23,7 +23,7 @@ jest:
       junit: junit.xml
 
 prettier:
-  script: yarn prettier --check
+  script: yarn prettier --check .
 
 publish:
   stage: publish

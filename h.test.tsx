@@ -2,17 +2,17 @@ import { h } from "./h";
 
 // This is a workaround for https://github.com/facebook/jest/issues/2549
 Object.defineProperty(Object, Symbol.hasInstance, {
-  value: (target: object) => target != null && typeof target === "object"
+  value: (target: object) => target != null && typeof target === "object",
 });
 
-test("assign properties", () => {
+it("assign properties", () => {
   const button = <button className="is-primary" type="button" />;
   expect(button).toBeInstanceOf(HTMLButtonElement);
   expect(button.className).toBe("is-primary");
 });
 
-test("add event handlers", () => {
-  const handler = jest.fn<void, [MouseEvent]>();
+it("add event handlers", () => {
+  const handler = jest.fn<unknown, [MouseEvent]>();
   const button = (
     <button onblur={(event): void => event.preventDefault()} onclick={handler} type="button" />
   );
@@ -20,18 +20,18 @@ test("add event handlers", () => {
   expect(handler).toHaveBeenCalledTimes(1);
 });
 
-test("shallow merge object properties", () => {
+it("shallow merge object properties", () => {
   const div = <div style={{ color: "red", backgroundColor: "blue" }} />;
   expect(div.style.color).toBe("red");
   expect(div.style.backgroundColor).toBe("blue");
 });
 
-test("set unknown properties as attributes", () => {
+it("set unknown properties as attributes", () => {
   const div = <div aria-busy />;
   expect(div.getAttribute("aria-busy")).toBe("true");
 });
 
-test("render element children", () => {
+it("render element children", () => {
   const div = (
     <div>
       <figure>
@@ -43,17 +43,17 @@ test("render element children", () => {
   expect(div.outerHTML).toBe("<div><figure><img></figure><span></span></div>");
 });
 
-test("render string children", () => {
+it("render string children", () => {
   const div = <div>Hello world!</div>;
   expect(div.outerHTML).toBe("<div>Hello world!</div>");
 });
 
-test("render number children", () => {
+it("render number children", () => {
   const div = <div>{42}</div>;
   expect(div.outerHTML).toBe("<div>42</div>");
 });
 
-test("ignore boolean or null children", () => {
+it("ignore boolean or null children", () => {
   const div = (
     <div>
       {true}
@@ -65,7 +65,7 @@ test("ignore boolean or null children", () => {
   expect(div.outerHTML).toBe("<div></div>");
 });
 
-test("ref", () => {
+it("ref", () => {
   let actual: HTMLUListElement | undefined;
   const expected = (
     <ul
@@ -77,7 +77,7 @@ test("ref", () => {
   expect(actual).toBe(expected);
 });
 
-test("without JSX or props", () => {
+it("without JSX or props", () => {
   const li = h("li");
   expect(li).toBeInstanceOf(HTMLLIElement);
 });
