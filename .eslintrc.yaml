@@ -1,7 +1,13 @@
 extends:
-  - plugin:@typescript-eslint/recommended
-  - plugin:prettier/recommended
-  - prettier/@typescript-eslint
+  - remcohaszing
+  - remcohaszing/jest
+  - remcohaszing/typechecking
 rules:
+  "@typescript-eslint/ban-types": off
   "@typescript-eslint/no-empty-interface": off
   "@typescript-eslint/no-namespace": off
+  "@typescript-eslint/no-unnecessary-condition": off
+  "@typescript-eslint/no-redeclare": off
+  jsdoc/check-tag-names: off
+  jsx-a11y/alt-text: off
+  react/forbid-dom-props: off

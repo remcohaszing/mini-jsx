@@ -1,12 +1,12 @@
 /**
  * Element children supported by Mini JSX.
  */
-type Children = boolean | number | null | string | undefined | Node | Children[];
+type Children = Children[] | Node | boolean | number | string | null | undefined;
 
 /**
  * A function that will be called with an HTML element.
  *
- * @param node The referenced HTML element.
+ * @param node - The referenced HTML element.
  */
 type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
 
@@ -41,7 +41,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * user's intended value for an input and specifies how predictions would be presented if they are
    * made.
    */
-  "aria-autocomplete"?: "inline" | "list" | "both" | "none";
+  "aria-autocomplete"?: "both" | "inline" | "list" | "none";
 
   /**
    * Indicates an element is being modified and that assistive technologies **MAY** want to wait
@@ -55,7 +55,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * @see aria-pressed
    * @see aria-selected
    */
-  "aria-checked"?: "mixed" | boolean;
+  "aria-checked"?: boolean | "mixed";
 
   /**
    * Defines the total number of columns in a `table`, `grid`, or `treegrid`.
@@ -95,7 +95,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * Indicates the element that represents the current item within a container or set of related
    * elements.
    */
-  "aria-current"?: "page" | "step" | "location" | "date" | "time" | boolean;
+  "aria-current"?: boolean | "date" | "location" | "page" | "step" | "time";
 
   /**
    * Identifies the element (or elements) that describes the object.
@@ -159,7 +159,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    *
    * @see aria-errormessage
    */
-  "aria-invalid"?: "grammar" | "spelling" | boolean;
+  "aria-invalid"?: boolean | "grammar" | "spelling";
 
   /**
    * Indicates keyboard shortcuts that an author has implemented to activate or give focus to an
@@ -242,7 +242,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * @see aria-checked
    * @see aria-selected
    */
-  "aria-pressed"?: "mixed" | boolean;
+  "aria-pressed"?: boolean | "mixed";
 
   /**
    * Indicates that the element is not editable, but is otherwise operable.
@@ -257,7 +257,7 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
    *
    * @see aria-atomic
    */
-  "aria-relevant"?: "additions" | "additions text" | "all" | "removals" | "text";
+  "aria-relevant"?: "additions text" | "additions" | "all" | "removals" | "text";
 
   /**
    * Indicates that user input is required on the element before a form may be submitted.
@@ -427,10 +427,10 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
 /**
  * Create a DOM node.
  *
- * @param tag The HTML tag name of the DOM node to create, or a function that returns a DOM node.
- * @param props Properties to assign to the DOM node or props to pass to the tag function.
- * @param children DOM nodes to append to the newly created DOM node. These may also be strings or
- *   numbers. If a boolean, `null`, or `undefined` is passed, the value is ignored.
+ * @param tag - The HTML tag name of the DOM node to create, or a function that returns a DOM node.
+ * @param props - Properties to assign to the DOM node or props to pass to the tag function.
+ * @param children - DOM nodes to append to the newly created DOM node. These may also be strings or
+ * numbers. If a boolean, `null`, or `undefined` is passed, the value is ignored.
  *
  * @returns The created DOM node.
  */
@@ -488,8 +488,6 @@ declare namespace h {
       [K in keyof HTMLElementTagNameMap]: Props<K> & {
         /**
          * This is defined to validate children defined using JSX syntax.
-         *
-         * @private
          */
         "{children}"?: Children;
       };
@@ -501,10 +499,14 @@ declare namespace h {
     interface IntrinsicAttributes {}
 
     /**
-     * This provides type checking for children and gives a better error message when specifying unknown props.
+     * This provides type checking for children and gives a better error message when specifying
+     * unknown props.
      */
     interface ElementChildrenAttribute {
-      "{children}": {};
+      /**
+       *
+       */
+      "{children}": never;
     }
   }
 }
