@@ -8,5 +8,6 @@ rules:
   "@typescript-eslint/no-namespace": off
   "@typescript-eslint/no-unnecessary-condition": off
   "@typescript-eslint/no-redeclare": off
+  jsdoc/check-tag-names: off
   jsx-a11y/alt-text: off
   react/forbid-dom-props: off
