@@ -488,9 +488,7 @@ export const jsxDEV = jsx;
 /**
  * Create a new document fragment.
  */
-export function Fragment(): DocumentFragment {
-  return new DocumentFragment();
-}
+export const Fragment: undefined = undefined;
 
 export namespace JSX {
   /**
