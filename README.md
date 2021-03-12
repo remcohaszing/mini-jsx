@@ -10,11 +10,9 @@ npm install mini-jsx
 
 ## Usage
 
-`h` can be used to render JSX.
+`mini-jsx` can be used to create native DOM nodes using JSX.
 
 ```jsx
-import { h } from "mini-jsx";
-
 const button = (
   <button
     className="is-primary"
@@ -30,29 +28,6 @@ const button = (
     <i className="button" />
     <span>Button text</span>
   </button>
-);
-```
-
-Alternatively, `h` can be called as a function.
-
-```js
-import { h } from "mini-jsx";
-
-const button = h(
-  "button",
-  {
-    className: "is-primary",
-    onclick() {
-      console.log("Click!");
-    },
-    ref(node) {
-      // Logs the button
-      console.log(node);
-    },
-    type: "button",
-  },
-  h("i", { className: "icon" }),
-  h("span", null, "Button text")
 );
 ```
 
@@ -83,10 +58,9 @@ Add the following properties to `compilerOptions` in `tsconfig.json`.
 ```jsonc
 {
   "compilerOptions": {
-    // This should always be "react".
-    "jsx": "react",
-    // Assuming mini-jsx is imported as "h"
-    "jsxFactory": "h",
+    // This should always be "react-jsx".
+    "jsx": "react-jsx",
+    "jsxImportSource": "mini-jsx",
 
     "lib": [
       "dom",
@@ -106,7 +80,7 @@ Add the following to your babel config.
 ```js
 module.exports = {
   plugins: [
-    ["@babel/plugin-transform-react-jsx", { pragma: "h", useBuiltIns: true }],
+    ["@babel/plugin-transform-react-jsx", { runtime: "automatic", importSource: "mini-jsx" }],
 
     // More plugins…
   ],
@@ -120,6 +94,5 @@ pragma can be used to transform a single file using `mini-jsx`. This way it can 
 example React in the same project.
 
 ```js
-/** @jsx h */
-import { h } from "mini-jsx";
+/** @jsxImportSource mini-jsx */
 ```

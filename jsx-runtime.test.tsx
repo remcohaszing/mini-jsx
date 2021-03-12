@@ -1,4 +1,4 @@
-import { h } from "./h";
+import "./jsx-runtime";
 
 // This is a workaround for https://github.com/facebook/jest/issues/2549
 Object.defineProperty(Object, Symbol.hasInstance, {
@@ -75,9 +75,4 @@ it("ref", () => {
     />
   );
   expect(actual).toBe(expected);
-});
-
-it("without JSX or props", () => {
-  const li = h("li");
-  expect(li).toBeInstanceOf(HTMLLIElement);
 });
