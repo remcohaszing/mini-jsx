@@ -13,7 +13,7 @@
     "types": ["jest"],
     "paths": {
       "mini-jsx": ["./jsx-runtime"],
-      "mini-jsx/jsx-runtime": ["./jsx-runtime"],
+      "mini-jsx/jsx-runtime": ["./jsx-runtime"]
     }
   }
 }
