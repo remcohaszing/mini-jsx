@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Create DOM elements using JSX",
   "type": "module",
-  "main": "h.js",
+  "main": "jsx-runtime.js",
   "homepage": "https://gitlab.com/appsemble/mini-jsx#readme",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
     "url": "https://gitlab.com/appsemble/mini-jsx.git/issues"
   },
   "files": [
-    "h.js",
-    "h.d.ts"
+    "jsx-runtime.js",
+    "jsx-runtime.d.ts"
   ],
   "scripts": {
     "prepack": "tsc -p tsconfig-build.json",

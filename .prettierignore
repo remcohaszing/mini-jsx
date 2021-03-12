@@ -1,4 +1,4 @@
 /coverage/
 node_modules/
-h.js
-h.d.ts
+*.js
+*.d.ts

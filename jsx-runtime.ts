@@ -1,14 +1,14 @@
 /**
  * Element children supported by Mini JSX.
  */
-type Children = Children[] | Node | boolean | number | string | null | undefined;
+export type Children = Children[] | Node | boolean | number | string | null | undefined;
 
 /**
  * A function that will be called with an HTML element.
  *
  * @param node - The referenced HTML element.
  */
-type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
+export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
 
 /**
  * Global HTML element attributes.
@@ -23,7 +23,7 @@ type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T
  *   }
  * }
  */
-interface Attributes<T extends keyof HTMLElementTagNameMap> {
+export interface Attributes<T extends keyof HTMLElementTagNameMap> {
   /**
    * Identifies the currently active element when DOM focus is on a `composite` widget, `textbox`,
    * `group`, or `application`.
@@ -412,6 +412,11 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
     | "tree"
     | "treegrid"
     | "treeitem";
+
+  /**
+   * Child nodes to append to the HTML element.
+   */
+  children?: Children;
 }
 
 /**
@@ -419,7 +424,10 @@ interface Attributes<T extends keyof HTMLElementTagNameMap> {
  */
 type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
   {
-    [K in keyof HTMLElementTagNameMap[T]]?: HTMLElementTagNameMap[T][K] extends Function
+    [K in keyof Omit<
+      HTMLElementTagNameMap[T],
+      "children"
+    >]?: HTMLElementTagNameMap[T][K] extends Function
       ? HTMLElementTagNameMap[T][K]
       : Partial<HTMLElementTagNameMap[T][K]>;
   };
@@ -429,17 +437,13 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
  *
  * @param tag - The HTML tag name of the DOM node to create, or a function that returns a DOM node.
  * @param props - Properties to assign to the DOM node or props to pass to the tag function.
- * @param children - DOM nodes to append to the newly created DOM node. These may also be strings or
- * numbers. If a boolean, `null`, or `undefined` is passed, the value is ignored.
  *
  * @returns The created DOM node.
  */
-const h = <T extends keyof HTMLElementTagNameMap>(
+export const jsx = <T extends keyof HTMLElementTagNameMap>(
   tag: T,
-  props?: Props<T>,
-  ...children: Children[]
+  { children, ref, ...props }: Props<T> = {}
 ): HTMLElementTagNameMap[T] => {
-  let ref: Ref<T> | undefined;
   const node = document.createElement(tag);
   const appendChildren = (child: Children): void => {
     if (Array.isArray(child)) {
@@ -448,22 +452,18 @@ const h = <T extends keyof HTMLElementTagNameMap>(
       node.append(child as Node);
     }
   };
-  if (props) {
-    Object.entries(props).forEach(([key, value]) => {
-      if (key === "ref") {
-        ref = value as Ref<T>;
-      } else if (key in node) {
-        type Key = keyof typeof node;
-        if (node[key as Key] instanceof Object && value instanceof Object) {
-          Object.assign(node[key as Key], value);
-        } else {
-          node[key as Key] = value as typeof node[Key];
-        }
+  Object.entries(props).forEach(([key, value]) => {
+    if (key in node) {
+      type Key = keyof typeof node;
+      if (node[key as Key] instanceof Object && value instanceof Object) {
+        Object.assign(node[key as Key], value);
       } else {
-        node.setAttribute(key, value as string);
+        node[key as Key] = value as typeof node[Key];
       }
-    });
-  }
+    } else {
+      node.setAttribute(key, value as string);
+    }
+  });
   appendChildren(children);
   if (ref) {
     ref(node);
@@ -471,44 +471,58 @@ const h = <T extends keyof HTMLElementTagNameMap>(
   return node;
 };
 
-declare namespace h {
-  /**
-   * This function can be used to create DOM elements.
-   */
-  namespace JSX {
-    /**
-     * An HTML element defined using JSX.
-     */
-    type Element = HTMLElement;
+/**
+ * This is used to support JSX with multiple children.
+ *
+ * @internal
+ */
+export const jsxs = jsx;
 
-    /**
-     * These properties can be passed to the JSX element.
-     */
-    type IntrinsicElements = {
-      [K in keyof HTMLElementTagNameMap]: Props<K> & {
-        /**
-         * This is defined to validate children defined using JSX syntax.
-         */
-        "{children}"?: Children;
-      };
-    };
+/**
+ * This is used to support JSX in dev mode.
+ *
+ * @internal
+ */
+export const jsxDEV = jsx;
 
-    /**
-     * This disallows the use of a function as JSX component.
-     */
-    interface IntrinsicAttributes {}
-
-    /**
-     * This provides type checking for children and gives a better error message when specifying
-     * unknown props.
-     */
-    interface ElementChildrenAttribute {
-      /**
-       *
-       */
-      "{children}": never;
-    }
-  }
+/**
+ * Create a new document fragment.
+ */
+export function Fragment(): DocumentFragment {
+  return new DocumentFragment();
 }
 
-export { h, Attributes, Children, Props, Ref };
+export namespace JSX {
+  /**
+   * An HTML element defined using JSX.
+   */
+  export type Element = HTMLElement;
+
+  /**
+   * These properties can be passed to the JSX element.
+   */
+  export type IntrinsicElements = {
+    [K in keyof HTMLElementTagNameMap]: Props<K> & {
+      /**
+       * This is defined to validate children defined using JSX syntax.
+       */
+      "{children}"?: Children;
+    };
+  };
+
+  /**
+   * This disallows the use of a function as JSX component.
+   */
+  export interface IntrinsicAttributes {}
+
+  /**
+   * This provides type checking for children and gives a better error message when specifying
+   * unknown props.
+   */
+  export interface ElementChildrenAttribute {
+    /**
+     *
+     */
+    "{children}": never;
+  }
+}
