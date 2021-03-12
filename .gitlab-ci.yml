@@ -22,6 +22,9 @@ jest:
     reports:
       junit: junit.xml
 
+pack:
+  script: yarn pack
+
 prettier:
   script: yarn prettier --check .
 
