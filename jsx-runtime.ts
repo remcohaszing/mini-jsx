@@ -338,6 +338,13 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
   "aria-valuetext"?: string;
 
   /**
+   * The `class` global attribute is a space-separated list of the case-sensitive classes of the
+   * element. Classes allow CSS and Javascript to select and access specific elements via the class
+   * selectors or functions like the DOM method {@link document.getElementsByClassName}.
+   */
+  class?: string;
+
+  /**
    * If defined, this function will be called with the created HTML node.
    *
    * This will be called after properties have been assigned and children have been added.
