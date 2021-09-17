@@ -2,7 +2,7 @@ import "./jsx-runtime";
 
 // This is a workaround for https://github.com/facebook/jest/issues/2549
 Object.defineProperty(Object, Symbol.hasInstance, {
-  value: (target: object) => target != null && typeof target === "object",
+  value: (target: unknown) => target != null && typeof target === "object",
 });
 
 it("assign properties", () => {
@@ -14,7 +14,7 @@ it("assign properties", () => {
 it("add event handlers", () => {
   const handler = jest.fn<unknown, [MouseEvent]>();
   const button = (
-    <button onblur={(event): void => event.preventDefault()} onclick={handler} type="button" />
+    <button onblur={(event) => event.preventDefault()} onclick={handler} type="button" />
   );
   button.dispatchEvent(new Event("click"));
   expect(handler).toHaveBeenCalledTimes(1);
@@ -34,13 +34,13 @@ it("set unknown properties as attributes", () => {
 it("render element children", () => {
   const div = (
     <div>
-      <figure>
-        <img />
-      </figure>
+      <section>
+        <p />
+      </section>
       <span />
     </div>
   );
-  expect(div.outerHTML).toBe("<div><figure><img></figure><span></span></div>");
+  expect(div.outerHTML).toBe("<div><section><p></p></section><span></span></div>");
 });
 
 it("render string children", () => {

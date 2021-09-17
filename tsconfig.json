@@ -8,7 +8,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "strictNullChecks": false,
     "target": "esnext",
     "types": ["jest"],
     "paths": {
