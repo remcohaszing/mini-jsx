@@ -79,7 +79,6 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    *
    * @see aria-colindex
    * @see aria-rowspan
-   *
    */
   "aria-colspan"?: number;
 
@@ -429,22 +428,20 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
 /**
  * Props that may be passed to a Mini JSX element for the specified HTML tag name.
  */
-type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> &
-  {
-    [K in keyof Omit<
-      HTMLElementTagNameMap[T],
-      "children"
-    >]?: HTMLElementTagNameMap[T][K] extends Function
-      ? HTMLElementTagNameMap[T][K]
-      : Partial<HTMLElementTagNameMap[T][K]>;
-  };
+type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> & {
+  [K in keyof Omit<
+    HTMLElementTagNameMap[T],
+    keyof Attributes<T>
+  >]?: HTMLElementTagNameMap[T][K] extends Function | null
+    ? HTMLElementTagNameMap[T][K]
+    : Partial<HTMLElementTagNameMap[T][K]>;
+};
 
 /**
  * Create a DOM node.
  *
  * @param tag - The HTML tag name of the DOM node to create, or a function that returns a DOM node.
  * @param props - Properties to assign to the DOM node or props to pass to the tag function.
- *
  * @returns The created DOM node.
  */
 export const jsx = <T extends keyof HTMLElementTagNameMap>(
@@ -495,7 +492,7 @@ export const jsxDEV = jsx;
 /**
  * Create a new document fragment.
  */
-export const Fragment: undefined = undefined;
+export const Fragment = undefined;
 
 export namespace JSX {
   /**
@@ -507,12 +504,7 @@ export namespace JSX {
    * These properties can be passed to the JSX element.
    */
   export type IntrinsicElements = {
-    [K in keyof HTMLElementTagNameMap]: Props<K> & {
-      /**
-       * This is defined to validate children defined using JSX syntax.
-       */
-      "{children}"?: Children;
-    };
+    [K in keyof HTMLElementTagNameMap]: Props<K>;
   };
 
   /**
@@ -526,8 +518,8 @@ export namespace JSX {
    */
   export interface ElementChildrenAttribute {
     /**
-     *
+     * This specifies the prop named `children` is used to specify JSX children.
      */
-    "{children}": never;
+    children: never;
   }
 }
