@@ -432,7 +432,7 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> & {
   [K in keyof Omit<
     HTMLElementTagNameMap[T],
     keyof Attributes<T>
-  >]?: HTMLElementTagNameMap[T][K] extends Function | null
+  >]?: HTMLElementTagNameMap[T][K] extends Function | null | undefined
     ? HTMLElementTagNameMap[T][K]
     : Partial<HTMLElementTagNameMap[T][K]>;
 };
