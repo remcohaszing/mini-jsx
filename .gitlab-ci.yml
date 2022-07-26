@@ -1,4 +1,4 @@
-image: node:12-alpine
+image: node:18-alpine
 
 variables:
   NPM_CONFIG_UNSAFE_PERM: "true"
@@ -8,25 +8,25 @@ stages:
   - publish
 
 before_script:
-  - yarn --frozen-lockfile
+  - npm i
 
 eslint:
-  script: yarn eslint --format gitlab .
+  script: npx eslint --format gitlab .
   artifacts:
     reports:
       codequality: gl-codequality.json
 
 jest:
-  script: yarn jest --coverage --reporters jest-junit
+  script: npx jest --coverage --reporters jest-junit
   artifacts:
     reports:
       junit: junit.xml
 
 pack:
-  script: yarn pack
+  script: npm pack
 
 prettier:
-  script: yarn prettier --check .
+  script: npx prettier --check .
 
 publish:
   stage: publish
@@ -37,4 +37,4 @@ publish:
     - npm publish
 
 tsc:
-  script: yarn tsc
+  script: npx tsc
