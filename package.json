@@ -3,7 +3,21 @@
   "version": "3.0.3",
   "description": "Create DOM elements using JSX",
   "type": "module",
-  "main": "jsx-runtime.js",
+  "main": "./jsx-runtime.js",
+  "exports": {
+    ".": {
+      "module": "./jsx-runtime.js",
+      "types": "./jsx-runtime.d.ts"
+    },
+    "./jsx-runtime": {
+      "module": "./jsx-runtime.js",
+      "types": "./jsx-runtime.d.ts"
+    },
+    "./jsx-dev-runtime": {
+      "module": "./jsx-runtime.js",
+      "types": "./jsx-runtime.d.ts"
+    }
+  },
   "homepage": "https://gitlab.com/appsemble/mini-jsx#readme",
   "repository": {
     "type": "git",
@@ -17,7 +31,7 @@
     "jsx-runtime.d.ts"
   ],
   "scripts": {
-    "prepack": "tsc -p tsconfig-build.json",
+    "prepack": "tsc --noEmit false",
     "test": "jest"
   },
   "keywords": [

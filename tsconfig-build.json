@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "exclude": ["*.test.tsx"],
-  "compilerOptions": {
-    "noEmit": false,
-    "declaration": true,
-    "types": []
-  }
-}

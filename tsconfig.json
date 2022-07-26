@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "jsx": "react-jsx",
     "jsxImportSource": "mini-jsx",
     "lib": ["dom", "es2017"],
