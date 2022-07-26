@@ -6,7 +6,7 @@ export type Children = Children[] | Node | boolean | number | string | null | un
 /**
  * A function that will be called with an HTML element.
  *
- * @param node - The referenced HTML element.
+ * @param node The referenced HTML element.
  */
 export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void;
 
@@ -440,8 +440,8 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> & {
 /**
  * Create a DOM node.
  *
- * @param tag - The HTML tag name of the DOM node to create, or a function that returns a DOM node.
- * @param props - Properties to assign to the DOM node or props to pass to the tag function.
+ * @param tag The HTML tag name of the DOM node to create, or a function that returns a DOM node.
+ * @param props Properties to assign to the DOM node or props to pass to the tag function.
  * @returns The created DOM node.
  */
 export const jsx = <T extends keyof HTMLElementTagNameMap>(
