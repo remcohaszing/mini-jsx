@@ -1,6 +1,6 @@
 {
   "name": "mini-jsx",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Create DOM elements using JSX",
   "type": "module",
   "main": "./jsx-runtime.js",
