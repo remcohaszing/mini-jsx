@@ -5,18 +5,9 @@
   "type": "module",
   "main": "./jsx-runtime.js",
   "exports": {
-    ".": {
-      "module": "./jsx-runtime.js",
-      "types": "./jsx-runtime.d.ts"
-    },
-    "./jsx-runtime": {
-      "module": "./jsx-runtime.js",
-      "types": "./jsx-runtime.d.ts"
-    },
-    "./jsx-dev-runtime": {
-      "module": "./jsx-runtime.js",
-      "types": "./jsx-runtime.d.ts"
-    }
+    ".": "./jsx-runtime.js",
+    "./jsx-runtime": "./jsx-runtime.js",
+    "./jsx-dev-runtime": "./jsx-runtime.js"
   },
   "homepage": "https://gitlab.com/appsemble/mini-jsx#readme",
   "repository": {
