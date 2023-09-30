@@ -492,14 +492,19 @@ export namespace JSX {
   export type Element = HTMLElement
 
   /**
+   * Only known HTML elements are a valid element type.
+   */
+  export type ElementType = keyof HTMLElementTagNameMap
+
+  /**
    * These properties can be passed to the JSX element.
    */
   export type IntrinsicElements = {
-    [K in keyof HTMLElementTagNameMap]: Props<K>
+    [K in ElementType]: Props<K>
   }
 
   /**
-   * This disallows the use of a function as JSX component.
+   * No props are treated differently.
    */
   export interface IntrinsicAttributes {}
 
