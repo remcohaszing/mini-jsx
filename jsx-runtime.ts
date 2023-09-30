@@ -476,23 +476,11 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
 }
 
 /**
- * This is used to support JSX with multiple children.
- *
- * @internal
- */
-export const jsxs = jsx
-
-/**
- * This is used to support JSX in dev mode.
- *
- * @internal
- */
-export const jsxDEV = jsx
-
-/**
  * Create a new document fragment.
  */
 export const Fragment = undefined
+
+export { jsx as jsxs, jsx as jsxDEV }
 
 export namespace JSX {
   /**
