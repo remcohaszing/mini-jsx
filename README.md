@@ -97,10 +97,10 @@ Add the following properties to `compilerOptions` in `tsconfig.json`.
 
 Add the following to your babel config.
 
-```js
-module.exports = {
-  plugins: [
-    ['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'mini-jsx' }]
+```jsonc
+{
+  "plugins": [
+    ["@babel/plugin-transform-react-jsx", { "runtime": "automatic", "importSource": "mini-jsx" }]
 
     // More plugins…
   ]
@@ -114,6 +114,7 @@ pragma can be used to transform a single file using `mini-jsx`. This way it can 
 example React in the same project.
 
 ```js
+/** @jsxRuntime automatic */
 /** @jsxImportSource mini-jsx */
 ```
 
