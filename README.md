@@ -17,18 +17,18 @@ const button = (
   <button
     className="is-primary"
     onclick={() => {
-      console.log("Click!");
+      console.log('Click!')
     }}
     ref={(node) => {
       // Logs the button
-      console.log(node);
+      console.log(node)
     }}
     type="button"
   >
     <i className="button" />
     <span>Button text</span>
   </button>
-);
+)
 ```
 
 ### Attributes
@@ -80,11 +80,11 @@ Add the following to your babel config.
 ```js
 module.exports = {
   plugins: [
-    ["@babel/plugin-transform-react-jsx", { runtime: "automatic", importSource: "mini-jsx" }],
+    ['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'mini-jsx' }]
 
     // More plugins…
-  ],
-};
+  ]
+}
 ```
 
 ## Using JSX Comments

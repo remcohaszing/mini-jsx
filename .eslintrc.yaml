@@ -3,9 +3,9 @@ extends:
   - remcohaszing/jest
   - remcohaszing/typechecking
 rules:
-  "@typescript-eslint/ban-types": off
-  "@typescript-eslint/no-empty-interface": off
-  "@typescript-eslint/no-namespace": off
+  '@typescript-eslint/ban-types': off
+  '@typescript-eslint/no-empty-interface': off
+  '@typescript-eslint/no-namespace': off
   jsdoc/check-tag-names: off
   react/forbid-dom-props: off
   unicorn/no-array-for-each: off

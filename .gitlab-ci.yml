@@ -1,7 +1,7 @@
 image: node:18-alpine
 
 variables:
-  NPM_CONFIG_UNSAFE_PERM: "true"
+  NPM_CONFIG_UNSAFE_PERM: 'true'
 
 stages:
   - test
