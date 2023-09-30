@@ -476,7 +476,9 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
 }
 
 /**
- * Create a new document fragment.
+ * This is needed for the JSX automatic runtime interface.
+ *
+ * @internal
  */
 export const Fragment = undefined
 
