@@ -1,37 +1,45 @@
-import './jsx-runtime'
+import assert from 'node:assert/strict'
+import { test } from 'node:test'
 
-// This is a workaround for https://github.com/facebook/jest/issues/2549
-Object.defineProperty(Object, Symbol.hasInstance, {
-  value: (target: unknown) => target != null && typeof target === 'object'
-})
+import { JSDOM } from 'jsdom'
 
-it('assign properties', () => {
+const { window } = new JSDOM('', { url: 'https://example.com' })
+
+Object.assign(globalThis, window)
+
+test('assign properties', () => {
   const button = <button className="is-primary" type="button" />
-  expect(button).toBeInstanceOf(HTMLButtonElement)
-  expect(button.className).toBe('is-primary')
+  assert.equal(button.tagName, 'BUTTON')
+  assert.equal(button.className, 'is-primary')
 })
 
-it('add event handlers', () => {
-  const handler = jest.fn<unknown, [MouseEvent]>()
+test('add event handlers', () => {
+  let clickCount = 0
   const button = (
-    <button onblur={(event) => event.preventDefault()} onclick={handler} type="button" />
+    <button
+      onclick={(event) => {
+        event.preventDefault()
+        clickCount += 1
+      }}
+      type="button"
+    />
   )
-  button.dispatchEvent(new Event('click'))
-  expect(handler).toHaveBeenCalledTimes(1)
+  button.click()
+  assert.equal(clickCount, 1)
 })
 
-it('shallow merge object properties', () => {
+test('shallow merge object properties', () => {
   const div = <div style={{ color: 'red', backgroundColor: 'blue' }} />
-  expect(div.style.color).toBe('red')
-  expect(div.style.backgroundColor).toBe('blue')
+  assert.equal(div.style.color, 'red')
+  assert.equal(div.style.backgroundColor, 'blue')
 })
 
-it('set unknown properties as attributes', () => {
+test('set unknown properties as attributes', () => {
   const div = <div aria-busy />
-  expect(div.getAttribute('aria-busy')).toBe('true')
+  assert.equal(div.getAttribute('aria-busy'), 'true')
 })
 
-it('render element children', () => {
+test('render element children', () => {
   const div = (
     <div>
       <section>
@@ -40,20 +48,20 @@ it('render element children', () => {
       <span />
     </div>
   )
-  expect(div.outerHTML).toBe('<div><section><p></p></section><span></span></div>')
+  assert.equal(div.outerHTML, '<div><section><p></p></section><span></span></div>')
 })
 
-it('render string children', () => {
+test('render string children', () => {
   const div = <div>Hello world!</div>
-  expect(div.outerHTML).toBe('<div>Hello world!</div>')
+  assert.equal(div.outerHTML, '<div>Hello world!</div>')
 })
 
-it('render number children', () => {
+test('render number children', () => {
   const div = <div>{42}</div>
-  expect(div.outerHTML).toBe('<div>42</div>')
+  assert.equal(div.outerHTML, '<div>42</div>')
 })
 
-it('ignore boolean or null children', () => {
+test('ignore boolean or null children', () => {
   const div = (
     <div>
       {true}
@@ -62,10 +70,10 @@ it('ignore boolean or null children', () => {
       {undefined}
     </div>
   )
-  expect(div.outerHTML).toBe('<div></div>')
+  assert.equal(div.outerHTML, '<div></div>')
 })
 
-it('ref', () => {
+test('ref', () => {
   let actual: HTMLUListElement | undefined
   const expected = (
     <ul
@@ -74,5 +82,5 @@ it('ref', () => {
       }}
     />
   )
-  expect(actual).toBe(expected)
+  assert.equal(actual, expected)
 })

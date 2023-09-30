@@ -460,9 +460,9 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
     if (key in node) {
       type Key = keyof typeof node
       if (node[key as Key] instanceof Object && value instanceof Object) {
-        Object.assign(node[key as Key], value)
+        Object.assign(node[key as Key] as typeof value, value)
       } else {
-        node[key as Key] = value as typeof node[Key]
+        node[key as Key] = value as (typeof node)[Key]
       }
     } else {
       node.setAttribute(key, value as string)

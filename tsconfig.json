@@ -3,16 +3,11 @@
     "declaration": true,
     "jsx": "react-jsx",
     "jsxImportSource": "mini-jsx",
-    "lib": ["dom", "es2017"],
-    "moduleResolution": "node",
+    "module": "node16",
     "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest"],
     "paths": {
-      "mini-jsx": ["./jsx-runtime"],
       "mini-jsx/jsx-runtime": ["./jsx-runtime"]
     }
   }
