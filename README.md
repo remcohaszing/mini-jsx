@@ -1,5 +1,10 @@
 # Mini JSX
 
+[![github actions](https://github.com/remcohaszing/mini-jsx/actions/workflows/ci.yaml/badge.svg)](https://github.com/remcohaszing/mini-jsx/actions/workflows/ci.yaml)
+[![npm version](https://img.shields.io/npm/v/mini-jsx)](https://www.npmjs.com/package/mini-jsx)
+[![npm downloads](https://img.shields.io/npm/dm/mini-jsx)](https://www.npmjs.com/package/mini-jsx)
+[![codecov](https://codecov.io/gh/remcohaszing/mini-jsx/branch/main/graph/badge.svg)](https://codecov.io/gh/remcohaszing/mini-jsx)
+
 Create DOM elements using JSX
 
 ## Table of Contents
