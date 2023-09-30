@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom'
 
 const { window } = new JSDOM('', { url: 'https://example.com' })
 
-Object.assign(globalThis, window)
+globalThis.document = window.document
 
 test('assign properties', () => {
   const button = <button className="is-primary" type="button" />
