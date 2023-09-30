@@ -9,14 +9,10 @@
     "./jsx-runtime": "./jsx-runtime.js",
     "./jsx-dev-runtime": "./jsx-runtime.js"
   },
-  "homepage": "https://gitlab.com/appsemble/mini-jsx#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.com/appsemble/mini-jsx.git"
-  },
-  "bugs": {
-    "url": "https://gitlab.com/appsemble/mini-jsx.git/issues"
-  },
+  "homepage": "https://github.com/remcohaszing/mini-jsx#readme",
+  "repository": "remcohaszing/mini-jsx",
+  "bugs": "https://github.com/remcohaszing/mini-jsx/issues",
+  "funding": "https://github.com/sponsors/remcohaszing",
   "files": [
     "jsx-runtime.js",
     "jsx-runtime.d.ts"
@@ -30,14 +26,13 @@
     "html",
     "jsx"
   ],
-  "author": "Appsemble <info@appsemble.com> (https://appsemble.com)",
+  "author": "remcohaszing <remcohaszing@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^28.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.0",
     "eslint-config-remcohaszing": "^5.0.0",
-    "eslint-formatter-gitlab": "^3.0.0",
     "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-jest-formatting": "^3.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
