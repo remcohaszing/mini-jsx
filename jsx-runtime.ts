@@ -469,9 +469,7 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
     }
   })
   appendChildren(children)
-  if (ref) {
-    ref(node)
-  }
+  ref?.(node)
   return node
 }
 
