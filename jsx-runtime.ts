@@ -440,9 +440,12 @@ type Props<T extends keyof HTMLElementTagNameMap> = Attributes<T> & {
 /**
  * Create a DOM node.
  *
- * @param tag The HTML tag name of the DOM node to create, or a function that returns a DOM node.
- * @param props Properties to assign to the DOM node or props to pass to the tag function.
- * @returns The created DOM node.
+ * @param tag
+ *   The HTML tag name of the DOM node to create, or a function that returns a DOM node.
+ * @param props
+ *   Properties to assign to the DOM node or props to pass to the tag function.
+ * @returns
+ *   The created DOM node.
  */
 export const jsx = <T extends keyof HTMLElementTagNameMap>(
   tag: T,
