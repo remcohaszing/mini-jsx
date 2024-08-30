@@ -1,4 +1,6 @@
 {
+  "exclude": ["src"],
+  "references": [{ "path": "./tsconfig.build.json" }],
   "compilerOptions": {
     "declaration": true,
     "jsx": "react-jsx",
@@ -6,9 +8,6 @@
     "module": "node16",
     "noEmit": true,
     "strict": true,
-    "target": "esnext",
-    "paths": {
-      "mini-jsx/jsx-runtime": ["./jsx-runtime"]
-    }
+    "target": "esnext"
   }
 }

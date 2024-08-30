@@ -1,16 +1,9 @@
-import assert from 'node:assert/strict'
-import { test } from 'node:test'
-
-import { JSDOM } from 'jsdom'
-
-const { window } = new JSDOM('', { url: 'https://example.com' })
-
-globalThis.document = window.document
+import { expect, test } from 'vitest'
 
 test('assign properties', () => {
   const button = <button className="is-primary" type="button" />
-  assert.equal(button.tagName, 'BUTTON')
-  assert.equal(button.className, 'is-primary')
+  expect(button.tagName).toBe('BUTTON')
+  expect(button.className).toBe('is-primary')
 })
 
 test('add event handlers', () => {
@@ -25,18 +18,18 @@ test('add event handlers', () => {
     />
   )
   button.click()
-  assert.equal(clickCount, 1)
+  expect(clickCount).toBe(1)
 })
 
 test('shallow merge object properties', () => {
   const div = <div style={{ color: 'red', backgroundColor: 'blue' }} />
-  assert.equal(div.style.color, 'red')
-  assert.equal(div.style.backgroundColor, 'blue')
+  expect(div.style.color).toBe('red')
+  expect(div.style.backgroundColor).toBe('blue')
 })
 
 test('set unknown properties as attributes', () => {
   const div = <div aria-busy />
-  assert.equal(div.getAttribute('aria-busy'), 'true')
+  expect(div.getAttribute('aria-busy')).toBe('true')
 })
 
 test('render element children', () => {
@@ -48,17 +41,17 @@ test('render element children', () => {
       <span />
     </div>
   )
-  assert.equal(div.outerHTML, '<div><section><p></p></section><span></span></div>')
+  expect(div.outerHTML).toBe('<div><section><p></p></section><span></span></div>')
 })
 
 test('render string children', () => {
   const div = <div>Hello world!</div>
-  assert.equal(div.outerHTML, '<div>Hello world!</div>')
+  expect(div.outerHTML).toBe('<div>Hello world!</div>')
 })
 
 test('render number children', () => {
   const div = <div>{42}</div>
-  assert.equal(div.outerHTML, '<div>42</div>')
+  expect(div.outerHTML).toBe('<div>42</div>')
 })
 
 test('ignore boolean or null children', () => {
@@ -70,7 +63,7 @@ test('ignore boolean or null children', () => {
       {undefined}
     </div>
   )
-  assert.equal(div.outerHTML, '<div></div>')
+  expect(div.outerHTML).toBe('<div></div>')
 })
 
 test('ref', () => {
@@ -82,5 +75,5 @@ test('ref', () => {
       }}
     />
   )
-  assert.equal(actual, expected)
+  expect(actual).toBe(expected)
 })

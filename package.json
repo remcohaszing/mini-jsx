@@ -3,11 +3,11 @@
   "version": "4.0.0",
   "description": "Create DOM elements using JSX",
   "type": "module",
-  "main": "./jsx-runtime.js",
+  "main": "./dist/mini-jsx.js",
   "exports": {
-    ".": "./jsx-runtime.js",
-    "./jsx-runtime": "./jsx-runtime.js",
-    "./jsx-dev-runtime": "./jsx-runtime.js"
+    ".": "./dist/mini-jsx.js",
+    "./jsx-runtime": "./dist/mini-jsx.js",
+    "./jsx-dev-runtime": "./dist/mini-jsx.js"
   },
   "homepage": "https://github.com/remcohaszing/mini-jsx#readme",
   "repository": "remcohaszing/mini-jsx",
@@ -18,8 +18,8 @@
     "jsx-runtime.d.ts"
   ],
   "scripts": {
-    "prepack": "tsc --noEmit false",
-    "test": "c8 tsx jsx-runtime.test.tsx"
+    "prepack": "tsc --build",
+    "test": "vitest run"
   },
   "keywords": [
     "dom",
@@ -29,18 +29,17 @@
   "author": "remcohaszing <remcohaszing@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jsdom": "^21.0.0",
-    "@types/node": "^20.0.0",
-    "c8": "^8.0.0",
+    "@vitest/browser": "^3.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
     "eslint": "^8.0.0",
     "eslint-config-remcohaszing": "^10.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-react": "^7.0.0",
-    "jsdom": "^22.0.0",
+    "playwright": "^1.0.0",
     "prettier": "^3.0.0",
     "remark-cli": "^11.0.0",
     "remark-preset-remcohaszing": "^2.0.0",
-    "tsx": "^3.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
   }
 }
