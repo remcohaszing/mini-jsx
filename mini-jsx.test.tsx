@@ -70,7 +70,7 @@ test('ref', () => {
   let actual: HTMLUListElement | undefined
   const expected = (
     <ul
-      ref={(node): void => {
+      ref={(node) => {
         actual = node
       }}
     />

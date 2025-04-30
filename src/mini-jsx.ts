@@ -1,14 +1,14 @@
 /**
  * Element children supported by Mini JSX.
  */
-export type Children = Children[] | Node | boolean | number | string | null | undefined
+export type Children = boolean | Children[] | Node | null | number | string | undefined
 
 /**
  * A function that will be called with an HTML element.
  *
  * @param node The referenced HTML element.
  */
-export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => void
+export type Ref<T extends keyof HTMLElementTagNameMap> = (node: HTMLElementTagNameMap[T]) => unknown
 
 /**
  * Global HTML element attributes.
@@ -55,7 +55,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * @see aria-pressed
    * @see aria-selected
    */
-  'aria-checked'?: boolean | 'mixed'
+  'aria-checked'?: 'mixed' | boolean
 
   /**
    * Defines the total number of columns in a `table`, `grid`, or `treegrid`.
@@ -94,7 +94,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * Indicates the element that represents the current item within a container or set of related
    * elements.
    */
-  'aria-current'?: boolean | 'date' | 'location' | 'page' | 'step' | 'time'
+  'aria-current'?: 'date' | 'location' | 'page' | 'step' | 'time' | boolean
 
   /**
    * Identifies the element (or elements) that describes the object.
@@ -158,7 +158,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    *
    * @see aria-errormessage
    */
-  'aria-invalid'?: boolean | 'grammar' | 'spelling'
+  'aria-invalid'?: 'grammar' | 'spelling' | boolean
 
   /**
    * Indicates keyboard shortcuts that an author has implemented to activate or give focus to an
@@ -241,7 +241,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    * @see aria-checked
    * @see aria-selected
    */
-  'aria-pressed'?: boolean | 'mixed'
+  'aria-pressed'?: 'mixed' | boolean
 
   /**
    * Indicates that the element is not editable, but is otherwise operable.
@@ -256,7 +256,7 @@ export interface Attributes<T extends keyof HTMLElementTagNameMap> {
    *
    * @see aria-atomic
    */
-  'aria-relevant'?: 'additions text' | 'additions' | 'all' | 'removals' | 'text'
+  'aria-relevant'?: 'additions' | 'additions text' | 'all' | 'removals' | 'text'
 
   /**
    * Indicates that user input is required on the element before a form may be submitted.
@@ -452,7 +452,7 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
   { children, ref, ...props }: Props<T> = {}
 ): HTMLElementTagNameMap[T] => {
   const node = document.createElement(tag)
-  const appendChildren = (child: Children): void => {
+  const appendChildren = (child: Children): undefined => {
     if (Array.isArray(child)) {
       child.forEach(appendChildren)
     } else if (child != null && child !== true && child !== false) {
@@ -483,7 +483,7 @@ export const jsx = <T extends keyof HTMLElementTagNameMap>(
  */
 export const Fragment = undefined
 
-export { jsx as jsxs, jsx as jsxDEV }
+export { jsx as jsxDEV, jsx as jsxs }
 
 export namespace JSX {
   /**
